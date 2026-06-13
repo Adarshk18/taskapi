@@ -35,7 +35,7 @@ def create_task(task: TaskCreate, db: Session = Depends(get_db)):
 
 @router.patch("/{task_id}/done", response_model=TaskOut)
 def mark_done(task_id: int, db: Session = Depends(get_db)):
-    task = db.query(models.Task).filter(models.Task_id == task_id).first()
+    task = db.query(models.Task).filter(models.Task.id == task_id).first()
     if not task:
         raise HTTPException(status_code=404, detail= "Task not found")
     task.done = True    
